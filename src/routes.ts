@@ -7,4 +7,9 @@ const router = Router();
 // 	return response.json({ ok: true });
 // });
 
+// Rota de teste de middleware de erro
+// router.get("/teste", (request: Request, response: Response) => {
+// 	throw new Error("teste de middleware");
+// });
+
 export { router };
