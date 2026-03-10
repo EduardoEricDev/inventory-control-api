@@ -1,4 +1,5 @@
 import { Router, Request, Response } from "express";
+import { CreateUserController } from "./controllers/user/CreateUserController";
 
 const router = Router();
 
@@ -11,5 +12,8 @@ const router = Router();
 // router.get("/teste", (request: Request, response: Response) => {
 // 	throw new Error("teste de middleware");
 // });
+
+// Rota de cadastro de usuário
+router.post('/users', new CreateUserController().handle);
 
 export { router };
