@@ -5,6 +5,12 @@ import { RemoveUserSchema } from "../../schemas";
 class RemoveUserController {
 	async handle(req: Request, res: Response) {
 		const { user_id } = RemoveUserSchema.parse(req.query);
+        const loggedUserId = req.user_id;
+        //Só pode deletar a própria conta
+        if (user_id !== loggedUserId) {
+            return res.status(401).json({ error: "Operação não permitida. Você só pode excluir sua própria conta." });
+        }
+
 		const removeUserService = new RemoveUserService();
 		const removeUser = await removeUserService.execute({ user_id });
 

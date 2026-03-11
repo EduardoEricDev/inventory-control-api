@@ -24,6 +24,6 @@ router.post("/session", new AuthRequestController().handle);
 //Rota de buscar os dados do usuário logado
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 //Rota de remover usuário
-router.delete("/remove", new RemoveUserController().handle);
+router.delete("/remove", isAuthenticated, new RemoveUserController().handle);
 
 export { router };
