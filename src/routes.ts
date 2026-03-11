@@ -1,6 +1,8 @@
 import { Router, Request, Response } from "express";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthRequestController } from "./controllers/user/AuthUserController";
+import { isAuthenticated } from "./middlewares/isAuthenticated";
+import { DetailUserController } from "./controllers/user/DetailUserController";
 
 const router = Router();
 
@@ -18,5 +20,7 @@ const router = Router();
 router.post("/users", new CreateUserController().handle);
 //Rota de autenticação de usuário
 router.post("/session", new AuthRequestController().handle);
+//Rota de buscar os dados do usuário logado
+router.get("/me", isAuthenticated, new DetailUserController().handle);
 
 export { router };
