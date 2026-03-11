@@ -3,6 +3,7 @@ import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthRequestController } from "./controllers/auth/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+import { RemoveUserController } from "./controllers/user/RemoveUserController";
 
 const router = Router();
 
@@ -22,5 +23,7 @@ router.post("/users", new CreateUserController().handle);
 router.post("/session", new AuthRequestController().handle);
 //Rota de buscar os dados do usuário logado
 router.get("/me", isAuthenticated, new DetailUserController().handle);
+//Rota de remover usuário
+router.delete("/remove", new RemoveUserController().handle);
 
 export { router };
