@@ -21,18 +21,18 @@ const router = Router();
 
 // ** USER ROUTES **
 // Cadastro de usuário
-router.post("/users", new CreateUserController().handle);
+router.post("/user", new CreateUserController().handle);
 // Autenticação de usuário
 router.post("/session", new AuthRequestController().handle);
 // Buscar os dados do usuário logado
 router.get("/me", isAuthenticated, new DetailUserController().handle);
 // Remover usuário
-router.delete("/remove", isAuthenticated, new RemoveUserController().handle);
+router.delete("/user/:user_id", isAuthenticated, new RemoveUserController().handle);
 
 // ** CATEGORY ROUTES **
 // Criar categoria
 router.post("/category", isAuthenticated, new CreateCategoryController().handle);
 // Atualizar Categoria
-router.put("/category/edit", isAuthenticated, new EditCategoryController().handle);
+router.put("/category/:category_id", isAuthenticated, new EditCategoryController().handle);
 
 export { router };

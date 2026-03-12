@@ -4,7 +4,7 @@ import { RemoveUserSchema } from "../../schemas";
 
 class RemoveUserController {
 	async handle(req: Request, res: Response) {
-		const { user_id } = RemoveUserSchema.parse(req.query);
+		const { user_id } = RemoveUserSchema.parse({user_id: req.params.user_id});
         const loggedUserId = req.user_id;
         //Só pode deletar a própria conta
         if (user_id !== loggedUserId) {
