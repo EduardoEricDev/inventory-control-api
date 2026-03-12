@@ -6,6 +6,7 @@ import { DetailUserController } from "./controllers/user/DetailUserController";
 import { RemoveUserController } from "./controllers/user/RemoveUserController";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 import { EditCategoryController } from "./controllers/category/EditCategoryController";
+import { ListCategoryController } from "./controllers/category/ListCategoryController";
 
 const router = Router();
 
@@ -34,5 +35,7 @@ router.delete("/user/:user_id", isAuthenticated, new RemoveUserController().hand
 router.post("/category", isAuthenticated, new CreateCategoryController().handle);
 // Atualizar Categoria
 router.put("/category/:category_id", isAuthenticated, new EditCategoryController().handle);
+// Lista todas as categorias
+router.get("/category", isAuthenticated, new ListCategoryController().handle);
 
 export { router };
