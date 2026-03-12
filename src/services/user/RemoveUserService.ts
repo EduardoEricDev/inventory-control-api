@@ -3,7 +3,7 @@ import { RemoveUserRequest } from "../../schemas";
 
 class RemoveUserService {
 	async execute({ user_id }: RemoveUserRequest) {
-		const removeUser = await prismaClient.user.delete({
+		const userRemoved = await prismaClient.user.delete({
 			where: {
 				id: user_id,
 			},
@@ -12,7 +12,7 @@ class RemoveUserService {
 			},
 		});
 
-		return removeUser;
+		return userRemoved;
 	}
 }
 
