@@ -8,3 +8,4 @@ export * from "./auth/AuthSchema";
 //Category
 export * from "./category/CategorySchema";
 export * from "./category/EditCategorySchema";
+export * from "./category/RemoveCategory";

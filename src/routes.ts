@@ -7,6 +7,8 @@ import { RemoveUserController } from "./controllers/user/RemoveUserController";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 import { EditCategoryController } from "./controllers/category/EditCategoryController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
+import { is } from "zod/v4/locales";
+import { RemoveCategoryController } from "./controllers/category/RemoveCategoryController";
 
 const router = Router();
 
@@ -35,7 +37,9 @@ router.delete("/user/:user_id", isAuthenticated, new RemoveUserController().hand
 router.post("/category", isAuthenticated, new CreateCategoryController().handle);
 // Atualizar Categoria
 router.put("/category/:category_id", isAuthenticated, new EditCategoryController().handle);
-// Lista todas as categorias
+// Listar todas as categorias
 router.get("/category", isAuthenticated, new ListCategoryController().handle);
+// Remover categoria
+router.delete("/category/:category_id", isAuthenticated, new RemoveCategoryController(). handle);
 
 export { router };
