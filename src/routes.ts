@@ -4,6 +4,7 @@ import { AuthRequestController } from "./controllers/auth/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 import { RemoveUserController } from "./controllers/user/RemoveUserController";
+import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 
 const router = Router();
 
@@ -17,13 +18,18 @@ const router = Router();
 // 	throw new Error("teste de middleware");
 // });
 
-// Rota de cadastro de usuário
+// ** USER ROUTES **
+// Cadastro de usuário
 router.post("/users", new CreateUserController().handle);
-//Rota de autenticação de usuário
+// Autenticação de usuário
 router.post("/session", new AuthRequestController().handle);
-//Rota de buscar os dados do usuário logado
+// Buscar os dados do usuário logado
 router.get("/me", isAuthenticated, new DetailUserController().handle);
-//Rota de remover usuário
+// Remover usuário
 router.delete("/remove", isAuthenticated, new RemoveUserController().handle);
+
+// ** CATEGORY ROUTES **
+// Criar categoria
+router.post("/category", isAuthenticated, new CreateCategoryController().handle);
 
 export { router };
