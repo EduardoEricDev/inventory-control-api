@@ -17,7 +17,7 @@ model User {
   password String
 
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   @@map("users")
 }
@@ -27,7 +27,7 @@ model Category {
   name String
 
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   products Product[]
 
@@ -43,7 +43,7 @@ model Product {
   amount      Int
 
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   category    Category @relation(fields: [category_id], references: [id])
   category_id String
@@ -57,7 +57,7 @@ model Item {
   id         String   @id @default(uuid())
   amount     Int
   created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id String
