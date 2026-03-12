@@ -4,3 +4,6 @@ export * from "./user/RemoveUserSchema";
 
 //Auth
 export * from "./auth/AuthSchema";
+
+//Category
+export * from "./category/CategorySchema";
