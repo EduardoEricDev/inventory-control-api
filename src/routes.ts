@@ -1,4 +1,6 @@
 import { Router, Request, Response } from "express";
+import multer from "multer";
+import uploadConfig from "./config/multer";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthRequestController } from "./controllers/auth/AuthUserController";
 import { isAuthenticated } from "./middlewares/isAuthenticated";
@@ -7,10 +9,10 @@ import { RemoveUserController } from "./controllers/user/RemoveUserController";
 import { CreateCategoryController } from "./controllers/category/CreateCategoryController";
 import { EditCategoryController } from "./controllers/category/EditCategoryController";
 import { ListCategoryController } from "./controllers/category/ListCategoryController";
-import { is } from "zod/v4/locales";
 import { RemoveCategoryController } from "./controllers/category/RemoveCategoryController";
 
 const router = Router();
+const upload = multer(uploadConfig.upload("./tmp"));
 
 // Rota de teste
 // router.get("/teste", (request: Request, response: Response) => {
