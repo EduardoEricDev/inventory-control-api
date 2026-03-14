@@ -1,5 +1,8 @@
 import prismaClient from "../../prisma";
-import { RemoveUserRequest } from "../../schemas";
+
+interface RemoveUserRequest {
+	user_id: string;
+}
 
 class RemoveUserService {
 	async execute({ user_id }: RemoveUserRequest) {
