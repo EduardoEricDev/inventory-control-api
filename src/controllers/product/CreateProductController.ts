@@ -12,7 +12,7 @@ class CreateProductController {
         const createProductService = new CreateProductService();
         const product = await createProductService.execute({
             name,
-            price,
+            price: parseFloat(price),
             description,
             banner,
             category_id,
