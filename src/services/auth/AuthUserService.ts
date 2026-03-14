@@ -1,7 +1,11 @@
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import prismaClient from "../../prisma";
-import { AuthRequest } from "../../schemas";
+
+interface AuthRequest {
+	email: string;
+	password: string;
+}
 
 class AuthRequestService {
 	async execute({ email, password }: AuthRequest) {
