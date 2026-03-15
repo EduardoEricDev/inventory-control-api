@@ -1,4 +1,3 @@
-import { tr } from "zod/v4/locales";
 import prismaClient from "../../prisma";
 
 class ListCategoryService {
