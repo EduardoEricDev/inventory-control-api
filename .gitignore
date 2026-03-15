@@ -142,3 +142,7 @@ vite.config.ts.timestamp-*
 node_modules/.prisma
 /prisma/*.db
 /prisma/*.db-journal
+
+#Products images
+/tmp/*
+!/tmp/.gitkeep
