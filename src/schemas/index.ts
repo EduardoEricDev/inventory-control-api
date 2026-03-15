@@ -9,6 +9,7 @@ export * from "./auth/AuthSchema";
 export * from "./category/CategorySchema";
 export * from "./category/EditCategorySchema";
 export * from "./category/RemoveCategory";
+export * from "./category/DetailCategorySchema";
 
 // Product
 export * from "./product/ProductSchema";

@@ -12,6 +12,7 @@ import { ListCategoryController } from "./controllers/category/ListCategoryContr
 import { RemoveCategoryController } from "./controllers/category/RemoveCategoryController";
 import { CreateProductController } from "./controllers/product/CreateProductController";
 import { EditProductController } from "./controllers/product/EditProductController";
+import { DetailCategoryController } from "./controllers/category/DetailCategoryController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -43,6 +44,8 @@ router.post("/category", isAuthenticated, new CreateCategoryController().handle)
 router.put("/category/:category_id", isAuthenticated, new EditCategoryController().handle);
 // Listar todas as categorias
 router.get("/category", isAuthenticated, new ListCategoryController().handle);
+// Buscar dados da categoria especifica
+router.get("/category/:category_id", isAuthenticated, new DetailCategoryController().handle);
 // Remover categoria
 router.delete("/category/:category_id", isAuthenticated, new RemoveCategoryController(). handle);
 
