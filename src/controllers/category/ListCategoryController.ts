@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { ListCategoryService } from "../../services/category/ListCategoryService";
-import { ca } from "zod/v4/locales";
 
 class ListCategoryController {
     async handle(req: Request, res: Response) {
