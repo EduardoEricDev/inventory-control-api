@@ -15,3 +15,4 @@ export * from "./category/DetailCategorySchema";
 export * from "./product/ProductSchema";
 export * from "./product/EditProductSchema";
 export * from "./product/ListProductByCategoryIdSchema";
+export * from "./product/RemoveProductSchema";
