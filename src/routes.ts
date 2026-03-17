@@ -18,6 +18,7 @@ import { EditProductController } from "./controllers/product/EditProductControll
 import { ListProductByCategoryIdController } from "./controllers/product/ListProductByCategoryIdController";
 import { ListProductController } from "./controllers/product/ListProductController";
 import { RemoveProductController } from "./controllers/product/RemoveProductController";
+import { DetailProductController } from "./controllers/product/DetailProductController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -30,6 +31,7 @@ router.get("/category", isAuthenticated, new ListCategoryController().handle); /
 router.get("/category/product", isAuthenticated, new ListProductByCategoryIdController().handle); // Produtos por categoria
 router.get("/category/:category_id", isAuthenticated, new DetailCategoryController().handle); // Detalhes da categoria
 router.get("/product", isAuthenticated, new ListProductController().handle); // Listar produtos
+router.get("/product/:product_id", isAuthenticated, new DetailProductController().handle); // Detalhes do produto
 
 // --- [POST] CRIAÇÃO E PROCESSAMENTO ---
 router.post("/user", new CreateUserController().handle); // Cadastro de usuário

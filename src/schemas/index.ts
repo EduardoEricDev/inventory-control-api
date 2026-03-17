@@ -16,3 +16,4 @@ export * from "./product/ProductSchema";
 export * from "./product/EditProductSchema";
 export * from "./product/ListProductByCategoryIdSchema";
 export * from "./product/RemoveProductSchema";
+export * from "./product/DetailProductSchema";
