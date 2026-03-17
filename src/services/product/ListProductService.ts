@@ -6,7 +6,11 @@ class ListProductService {
             select: {
                 id: true,
                 name: true,
+                price: true,
+                description: true,
+                banner: true,
                 amount: true,
+                category_id: true,
             },
             orderBy: {
                 created_at: 'desc'

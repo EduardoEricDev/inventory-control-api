@@ -11,6 +11,7 @@ class ListProductByCategoryIdService {
                 ...(category_id && { category_id }),
             }, select: {
                 id: true,
+                name: true,
                 price: true,
                 description: true,
                 banner: true,
