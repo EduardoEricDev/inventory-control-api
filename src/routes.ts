@@ -19,6 +19,7 @@ import { ListProductByCategoryIdController } from "./controllers/product/ListPro
 import { ListProductController } from "./controllers/product/ListProductController";
 import { RemoveProductController } from "./controllers/product/RemoveProductController";
 import { DetailProductController } from "./controllers/product/DetailProductController";
+import { SaleProductController } from "./controllers/product/SaleProductController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -41,6 +42,7 @@ router.post("/product", isAuthenticated, upload.single("file"), new CreateProduc
 
 // --- [PUT] ATUALIZAÇÃO ---
 router.put("/category/:category_id", isAuthenticated, new EditCategoryController().handle); // Editar categoria
+router.put("/product/sale/:product_id", isAuthenticated, new SaleProductController().handle); // Venda de produto (baixa de estoque)
 router.put("/product/:product_id", isAuthenticated, upload.single("file"), new EditProductController().handle); // Editar produto
 
 // --- [DELETE] REMOÇÃO ---
