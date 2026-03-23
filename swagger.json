@@ -1,1 +1,57 @@
-{}
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Inventory Control API",
+        "description": "API para gerenciamento de estoque, produtos e categorias",
+        "version": "1.0.0",
+        "contact": "eduardo.dev2022@gmail.com"
+    },
+    "servers": [
+        {
+            "url":"http://localhost:3333/v1",
+            "description": "Servidor Local"
+        }
+    ],
+    "paths": {
+
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "schemas": {
+            "ZodErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string", "example": "Validation error."},
+                    "issues": {"type": "object"}
+                }
+            },
+            "CommonErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {"type": "string", "example": "Mensagem descritiva de negócio."}
+                }
+            },
+            "responses": {
+                "badRequest": {
+                    "description": "Erro de validação (Zod) ou Regra de negócio",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "oneOf": [
+                                    { "$ref": "#/components/schemas/ZodErrorResponse" },
+                                    { "$ref": "#/components/schemas/CommonErrorResponse" }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
