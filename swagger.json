@@ -1,57 +1,86 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Inventory Control API",
-        "description": "API para gerenciamento de estoque, produtos e categorias",
-        "version": "1.0.0",
-        "contact": "eduardo.dev2022@gmail.com"
-    },
-    "servers": [
-        {
-            "url":"http://localhost:3333/v1",
-            "description": "Servidor Local"
-        }
-    ],
-    "paths": {
-
-    },
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
-            }
-        },
-        "schemas": {
-            "ZodErrorResponse": {
-                "type": "object",
-                "properties": {
-                    "message": {"type": "string", "example": "Validation error."},
-                    "issues": {"type": "object"}
-                }
-            },
-            "CommonErrorResponse": {
-                "type": "object",
-                "properties": {
-                    "error": {"type": "string", "example": "Mensagem descritiva de negócio."}
-                }
-            },
-            "responses": {
-                "badRequest": {
-                    "description": "Erro de validação (Zod) ou Regra de negócio",
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "oneOf": [
-                                    { "$ref": "#/components/schemas/ZodErrorResponse" },
-                                    { "$ref": "#/components/schemas/CommonErrorResponse" }
-                                ]
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Inventory Control API",
+		"description": "API para gerenciamento de estoque, produtos e categorias",
+		"version": "1.0.0",
+		"contact": "eduardo.dev2022@gmail.com"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3333/v1",
+			"description": "Servidor Local"
+		}
+	],
+	"paths": {},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		},
+		"schemas": {
+			"ZodErrorResponse": {
+				"type": "object",
+				"properties": {
+					"message": { "type": "string", "example": "Validation error." },
+					"issues": { "type": "object" }
+				}
+			},
+			"CommonErrorResponse": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string",
+						"example": "Mensagem descritiva de negócio."
+					}
+				}
+			},
+			"UnauthorizedError": {
+				"type": "object",
+				"properties": {
+					"error": {
+						"type": "string",
+						"example": "Token inválido ou não fornecido."
+					}
+				}
+			},
+			"responses": {
+				"badRequest": {
+					"description": "Erro de validação (Zod) ou Regra de negócio",
+					"content": {
+						"application/json": {
+							"schema": {
+								"oneOf": [
+									{ "$ref": "#/components/schemas/ZodErrorResponse" },
+									{ "$ref": "#/components/schemas/CommonErrorResponse" }
+								]
+							}
+						}
+					}
+				},
+				"Unauthorized": {
+					"description": "Não autorizado - Token JWT ausente, expirado ou inválido",
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+						}
+					}
+				},
+				"InternalError": {
+					"description": "Erro interno do servidor",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "string",
+								"example": "Internal server error"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
