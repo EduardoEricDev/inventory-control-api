@@ -12,7 +12,45 @@
 			"description": "Servidor Local"
 		}
 	],
-	"paths": {},
+	"tags": [
+		{ "name": "Users", "description": "Gerenciamento de usuários do sistema" },
+		{ "name": "Auth", "description": "Endpoints de autenticação e login" },
+		{
+			"name": "Categories",
+			"description": "Gerenciamento de categorias para organização de produtos"
+		},
+		{
+			"name": "Products",
+			"description": "Gerenciamento do catálogo de produtos e controle de estoque (vendas)"
+		}
+	],
+	"paths": {
+		"/user": {
+			"post": {
+				"summary": "Cadastrar novo usuário",
+				"tags": ["Users"],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": { "$ref": "#/components/schemas/CreateUserRequest" }
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Usuário criado com sucesso",
+						"content": {
+							"application/json": {
+								"schema": { "$ref": "#/components/schemas/CreateUserResponse" }
+							}
+						}
+					},
+					"400": { "$ref": "#/components/responses/BadRequest" },
+					"500": { "$ref": "#/components/responses/InternalError" }
+				}
+			}
+		}
+	},
 	"components": {
 		"securitySchemes": {
 			"bearerAuth": {
@@ -22,14 +60,14 @@
 			}
 		},
 		"schemas": {
-			"ZodErrorResponse": {
+			"ZodErrorModel": {
 				"type": "object",
 				"properties": {
 					"message": { "type": "string", "example": "Validation error." },
 					"issues": { "type": "object" }
 				}
 			},
-			"CommonErrorResponse": {
+			"CommonErrorModel": {
 				"type": "object",
 				"properties": {
 					"error": {
@@ -38,7 +76,7 @@
 					}
 				}
 			},
-			"UnauthorizedError": {
+			"UnauthorizedErrorModel": {
 				"type": "object",
 				"properties": {
 					"error": {
@@ -47,35 +85,58 @@
 					}
 				}
 			},
-			"responses": {
-				"badRequest": {
-					"description": "Erro de validação (Zod) ou Regra de negócio",
-					"content": {
-						"application/json": {
-							"schema": {
-								"oneOf": [
-									{ "$ref": "#/components/schemas/ZodErrorResponse" },
-									{ "$ref": "#/components/schemas/CommonErrorResponse" }
-								]
-							}
+			"CreateUserRequest": {
+				"type": "object",
+				"required": ["name", "email", "password"],
+				"properties": {
+					"name": { "type": "string", "example": "Eduardo Eric" },
+					"email": { "type": "string", "example": "eduardo@teste.com" },
+					"password": { "type": "string", "example": "123456" }
+				}
+			},
+			"CreateUserResponse": {
+				"type": "object",
+				"properties": {
+					"id": { "type": "string", "format": "uuid" },
+					"name": { "type": "string" },
+					"email": { "type": "string" }
+				}
+			}
+		},
+		"responses": {
+			"BadRequest": {
+				"description": "Erro de validação (Zod) ou Regra de negócio",
+				"content": {
+					"application/json": {
+						"schema": {
+							"oneOf": [
+								{ "$ref": "#/components/schemas/ZodErrorModel" },
+								{ "$ref": "#/components/schemas/CommonErrorModel" }
+							]
 						}
 					}
-				},
-				"Unauthorized": {
-					"description": "Não autorizado - Token JWT ausente, expirado ou inválido",
-					"content": {
-						"application/json": {
-							"schema": { "$ref": "#/components/schemas/UnauthorizedError" }
-						}
+				}
+			},
+			"Unauthorized": {
+				"description": "Não autorizado - Token JWT ausente, expirado ou inválido",
+				"content": {
+					"application/json": {
+						"schema": { "$ref": "#/components/schemas/UnauthorizedErrorModel" }
 					}
-				},
-				"InternalError": {
-					"description": "Erro interno do servidor",
-					"content": {
-						"application/json": {
-							"schema": {
-								"type": "string",
-								"example": "Internal server error"
+				}
+			},
+			"InternalError": {
+				"description": "Erro interno do servidor",
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"status": { "type": "string", "example": "error" },
+								"message": {
+									"type": "string",
+									"example": "Internal server error."
+								}
 							}
 						}
 					}
