@@ -49,6 +49,40 @@
 					"500": { "$ref": "#/components/responses/InternalError" }
 				}
 			}
+		},
+		"/session": {
+			"post": {
+				"summary": "Realizar login (autenticação)",
+				"tags": ["Auth"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {"$ref": "#/components/schemas/AuthRequest"}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login Realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {"$ref": "#/components/schemas/AuthResponse"}
+                            }
+                        }
+                    },
+                    "400": {"$ref": "#/components/responses/BadRequest"},
+                    "401": {
+                        "description": "E-mail ou senha incorretos",
+                        "content": {
+                            "application/json": {
+                                "schema": {"$ref": "#/components/schemas/CommonErrorModel"}
+                            }
+                        }
+                    },
+                    "500": {"$ref": "#/components/responses/InternalError"}
+                }
+			}
 		}
 	},
 	"components": {
@@ -100,6 +134,23 @@
 					"id": { "type": "string", "format": "uuid" },
 					"name": { "type": "string" },
 					"email": { "type": "string" }
+				}
+			},
+			"AuthRequest": {
+				"type": "object",
+				"required": ["email", "password"],
+				"properties": {
+					"email": { "type": "string", "example": "eduardo@teste.com" },
+					"password": { "type": "string", "example": "123456" }
+				}
+			},
+			"AuthResponse": {
+				"type": "object",
+				"properties": {
+					"id": { "type": "string", "format": "uuid" },
+					"email": { "type": "string", "example": "eduardo@teste.com" },
+					"password": { "type": "string", "example": "123456" },
+					"token": { "type": "string", "example": "eyJhbGciOiJIUzI1NiIsInR..." }
 				}
 			}
 		},
