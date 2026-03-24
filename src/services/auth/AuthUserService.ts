@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import prismaClient from "../../prisma";
+import { AppError } from "../../errors/AppError";
 
 interface AuthRequest {
 	email: string;
@@ -17,14 +18,14 @@ class AuthRequestService {
 		});
 
 		if (!user) {
-			throw new Error("Email or password incorrect!");
+			throw new AppError("Email or password incorrect!", 401);
 		}
 
 		//Comparar senha digitada com a do banco
 		const passwordMatch = await compare(password, user.password);
 
 		if (!passwordMatch) {
-			throw new Error("Email or password incorrect");
+			throw new AppError("Email or password incorrect!", 401);
 		}
 
 		//Gerar token JWT
